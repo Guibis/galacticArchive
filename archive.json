@@ -5,33 +5,5 @@
     "type": "Biological",
     "dangerLevel": "Extreme",
     "description": "Highly aggressive endoparasitoid extraterrestrial species."
-  },
-  {
-    "id": 1769024356177,
-    "name": "Test Entity",
-    "type": "Verification",
-    "dangerLevel": "High",
-    "description": "CC"
-  },
-  {
-    "id": 1769024806520,
-    "name": "Test Entity Updated",
-    "type": "Refactored",
-    "dangerLevel": "Moderate",
-    "description": "FSEF"
-  },
-  {
-    "id": 1769024978464,
-    "name": "Test Entity Updated",
-    "type": "Refactored",
-    "dangerLevel": "Unknown",
-    "description": "daewf"
-  },
-  {
-    "id": 1769025805212,
-    "name": "Ggisrugiosr",
-    "type": "gsegse",
-    "dangerLevel": "Unknown",
-    "description": "segsgarsgarsdgaerggargadrgadrgardg"
   }
 ]
