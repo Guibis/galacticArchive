@@ -32,6 +32,20 @@ app.get('/archive/:id', (req, res) => {
     res.json(item);
 });
 
+app.post('/archive', (req, res) => {
+    const archive = readArchive();
+    const item = {
+        id: Date.now(),
+        name: req.body.name,
+        type: req.body.type,
+        dangerLevel: req.body.dangerLevel,
+        description: req.body.description,
+    };
+    archive.push(item);
+    writeArchive(archive);
+    res.json(item);
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
