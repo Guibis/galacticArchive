@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+    --federation-bg: #000000;
+    --lcars-orange: #ff9900;
+    --lcars-red: #c91515;
+    --lcars-blue: #99ccff;
+    --lcars-purple: #9999cc;
+    --lcars-pale: #ffcc99;
+    --text-color: #ff9900;
+    --font-primary: "Press Start 2P", "Impact", "Arial Narrow", sans-serif;
+    --font-mono: "VT323", "Consolas", "Monaco", monospace;
+}
+
+body {
+    background-color: var(--federation-bg);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    overflow-x: hidden;
+    font-size: 12px; /* Base size for mobile readability with pixel font */
+}
+
+/* Mobile First: Default Layout */
+.terminal-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* Header */
+.lcars-header {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.lcars-elbow {
+    width: 60px; /* Smaller elbow for mobile */
+    height: 20px;
+    background-color: var(--lcars-purple);
+    border-bottom-left-radius: 20px;
+    margin-right: 10px;
+}
+
+.lcars-bar {
+    flex-grow: 1;
+    height: 20px;
+    background-color: var(--lcars-blue);
+    color: var(--federation-bg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+/* Main Layout: Column by default (Mobile) */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+/* Archive Grid */
+.item-list-section {
+    width: 100%;
+    border: 2px solid var(--lcars-blue);
+    padding: 15px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.archive-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
+}
+
+.archive-card {
+    background-color: #111;
+    border-left: 8px solid var(--lcars-orange);
+    padding: 15px;
+    font-family: var(--font-mono);
+    color: var(--lcars-blue);
+    position: relative;
+    transition: transform 0.2s, background-color 0.2s;
+    font-size: 1.1rem;
+}
+
+.archive-card:hover {
+    transform: scale(1.02);
+    background-color: #222;
+}
+
+.archive-card h3 {
+    margin-top: 0;
+    color: var(--lcars-pale);
+    border-bottom: 1px solid var(--lcars-purple);
+    padding-bottom: 5px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.archive-card p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-bottom: 10px;
+}
+
+.card-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Control Panel */
+.control-panel {
+    width: 100%;
+    border: 2px solid var(--lcars-red);
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #050505;
+    box-sizing: border-box;
+    /* Order: 2 puts it below content on mobile, 
+       but keeping typical flow (content first) is fine. */
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--lcars-purple);
+    font-size: 0.8rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    border: 1px solid var(--lcars-blue);
+    color: var(--lcars-orange);
+    font-family: var(--font-mono);
+    box-sizing: border-box;
+    font-size: 1.1rem; /* Larger touch targets */
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--lcars-pale);
+}
+
+/* Buttons */
+.lcars-btn {
+    background-color: var(--lcars-orange);
+    color: black;
+    border: none;
+    padding: 15px 20px; /* Larger touch target */
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+    border-radius: 15px 0 0 15px;
+    transition: background-color 0.3s;
+    font-size: 0.8rem;
+    width: 100%; /* Full width buttons on mobile */
+    margin-top: 10px;
+}
+
+.lcars-btn:hover {
+    background-color: var(--lcars-pale);
+}
+
+.action-edit, .action-delete {
+    width: auto;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 0;
+}
+
+.action-edit {
+    background-color: var(--lcars-blue);
+}
+
+.action-edit:hover {
+    background-color: #6d91b6;
+}
+
+.action-delete {
+    background-color: var(--lcars-red);
+}
+
+.action-delete:hover {
+    background-color: #910f0f;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: black;
+    border: 2px solid var(--lcars-purple);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 20px var(--lcars-purple);
+    box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--lcars-blue);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--lcars-red);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px; /* Larger touch target */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--lcars-purple);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--lcars-blue);
+}
+
+@media (min-width: 480px) {
+  .archive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .terminal-container {
+    padding: 20px;
+  }
+
+  .lcars-elbow {
+    width: 150px;
+    height: 30px;
+    border-bottom-left-radius: 30px;
+  }
+
+  .lcars-bar {
+    height: 30px;
+    font-size: 1.2rem;
+    padding-right: 20px;
+  }
+
+  .main-content {
+    flex-direction: row;
+  }
+
+  .item-list-section {
+    flex: 2;
+    width: auto;
+  }
+
+  .archive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .control-panel {
+    flex: 1;
+    width: auto;
+  }
+
+  .lcars-btn {
+    width: auto;
+    padding: 10px 20px;
+  }
+
+  .action-edit, .action-delete {
+    padding: 8px 15px;
+    font-size: 0.75rem;
+  }
+  .form-group{
+    font-size: 2rem;
+  }
+  .archive-card{
+    font-size: 1.3rem;
+  }
+  .archive-card h3{
+    font-size: 1.5rem;
+  }
+}
