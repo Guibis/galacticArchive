@@ -23,6 +23,15 @@ app.get('/archive', (req, res) => {
     res.json(archive);
 });
 
+app.get('/archive/:id', (req, res) => {
+    const archive = readArchive();
+    const item = archive.find((item) => item.id === parseInt(req.params.id));
+    if (!item) {
+        return res.status(404).send('Item not found');
+    }
+    res.json(item);
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
