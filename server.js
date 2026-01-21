@@ -7,7 +7,7 @@ const archive_file = './archive.json';
 
 const readArchive = () => {
     try {
-        const data = fs.readFileSync(archive_file);
+        const data = fs.readFileSync(archive_file, 'utf-8');
         return JSON.parse(data);
     } catch (error) {
         return [];
@@ -15,7 +15,7 @@ const readArchive = () => {
 };
 
 const writeArchive = (data) => {
-    fs.writeFileSync(archive_file, JSON.stringify(data));
+    fs.writeFileSync(archive_file, JSON.stringify(data, null, 2));
 };
 
 app.get('/archive', (req, res) => {
@@ -25,7 +25,7 @@ app.get('/archive', (req, res) => {
 
 app.get('/archive/:id', (req, res) => {
     const archive = readArchive();
-    const item = archive.find((item) => item.id === parseInt(req.params.id));
+    const item = archive.find((item) => item.id == req.params.id);
     if (!item) {
         return res.status(404).send('Item not found');
     }
@@ -48,14 +48,25 @@ app.post('/archive', (req, res) => {
 
 app.put('/archive/:id', (req, res) => {
     const archive = readArchive();
-    const item = archive.find((item) => item.id === parseInt(req.params.id));
+    const item = archive.find((item) => item.id == req.params.id);
     if (!item) {
         return res.status(404).send('Item not found');
     }
-    item.name = req.body.name;
-    item.type = req.body.type;
-    item.dangerLevel = req.body.dangerLevel;
-    item.description = req.body.description;
+    if (req.body.name) item.name = req.body.name;
+    if (req.body.type) item.type = req.body.type;
+    if (req.body.dangerLevel) item.dangerLevel = req.body.dangerLevel;
+    if (req.body.description) item.description = req.body.description;
+    writeArchive(archive);
+    res.json(item);
+});
+
+app.delete('/archive/:id', (req, res) => {
+    const archive = readArchive();
+    const item = archive.find((item) => item.id == req.params.id);
+    if (!item) {
+        return res.status(404).send('Item not found');
+    }
+    archive.splice(archive.indexOf(item), 1);
     writeArchive(archive);
     res.json(item);
 });

@@ -1,9 +1,16 @@
 [
-    {
-        "id": "101",
-        "name": "Xenomorph XX121",
-        "type": "Biological",
-        "dangerLevel": "Extreme",
-        "description": "Espécie extraterrestre endoparasitoide altamente agressiva."
-    }
+  {
+    "id": "101",
+    "name": "Xenomorph XX121",
+    "type": "Biological",
+    "dangerLevel": "Extreme",
+    "description": "Highly aggressive endoparasitoid extraterrestrial species."
+  },
+  {
+    "id": 1769015585159,
+    "name": "Matukris",
+    "type": "Gas",
+    "dangerLevel": "Low",
+    "description": "Mamarouk"
+  }
 ]
