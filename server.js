@@ -47,6 +47,9 @@ app.post('/archive', (req, res) => {
         dangerLevel: req.body.dangerLevel,
         description: req.body.description,
     };
+    if(!item.name || !item.type || !item.dangerLevel || !item.description) {
+        return res.status(204).send('Missing required fields');
+    }
     archive.push(item);
     writeArchive(archive);
     res.json(item);
