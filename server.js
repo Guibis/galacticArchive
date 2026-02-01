@@ -1,19 +1,12 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const routesEntries = require('./routes/routesEntries');
+
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/api', routesEntries);
 
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
-
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
+const port = 3000;
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
