@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { errorHandling } = require('../middleware/errorHandling');
 const { getEntries, getEntryById } = require('../controllers/get');
 const createEntry = require('../controllers/post');
 const updateEntry = require('../controllers/put');
 const deleteEntry = require('../controllers/delete');
-
-router.use(errorHandling);
 
 router.get('/api/entries', getEntries);
 router.get('/api/entries/:id', getEntryById);

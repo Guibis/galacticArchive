@@ -1,13 +1,11 @@
-const API_URL = '/archive';
+const API_URL = 'http://localhost:3000/api/entries';
 
-// Initialize UI
 document.addEventListener('DOMContentLoaded', () => {
     createUI();
     attachEventListeners();
     loadItems();
 });
 
-// Helper for creating elements
 function createElement(tag, className, text) {
     const el = document.createElement(tag);
     if (className) el.className = className;
@@ -46,17 +44,17 @@ function createFormGroup(labelId, labelText, inputTag, inputName, isRequired = t
 function createUI() {
     const appContainer = createElement('div', 'terminal-container');
 
-    // Header
     const header = createElement('header', 'lcars-header');
     header.appendChild(createElement('div', 'lcars-elbow'));
-    header.appendChild(createElement('div', 'lcars-bar', '🚀 GALACTIC ARCHIVE'));
+    const div = createElement('div', 'lcars-bar');
+    div.appendChild(createElement('span', 'lcars-bar', '🚀'));
+    div.appendChild(createElement('span', 'lcars-bar', 'GALACTIC ARCHIVE'));
+    header.appendChild(div);
     appContainer.appendChild(header);
 
-    // Main Content
     const main = createElement('main', 'main-content');
     appContainer.appendChild(main);
 
-    // Archive Section
     const section = createElement('section', 'item-list-section');
     section.appendChild(createElement('h2', '', 'ALIEN SPECIES DATABASE'));
     const archiveGrid = createElement('div', 'archive-grid');
@@ -64,7 +62,6 @@ function createUI() {
     section.appendChild(archiveGrid);
     main.appendChild(section);
 
-    // Control Panel (Create Form)
     const aside = createElement('aside', 'control-panel');
     aside.appendChild(createElement('h2', '', 'NEW ENTRY INPUT'));
     
@@ -92,7 +89,6 @@ function createUI() {
     aside.appendChild(createForm);
     main.appendChild(aside);
 
-    // Modal
     const modal = createElement('div', 'modal hidden');
     modal.id = 'edit-modal';
     
@@ -136,13 +132,12 @@ function attachEventListeners() {
     const closeModal = document.getElementById('close-modal');
     const editModal = document.getElementById('edit-modal');
 
-    // Create Item
     createForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const newItem = {
             name: document.getElementById('name').value,
             type: document.getElementById('type').value,
-            dangerLevel: document.getElementById('dangerLevel').value,
+            danger_level: document.getElementById('dangerLevel').value,
             description: document.getElementById('description').value
         };
 
@@ -159,19 +154,17 @@ function attachEventListeners() {
         }
     });
 
-    // Close Modal
     closeModal.addEventListener('click', () => {
         editModal.classList.add('hidden');
     });
 
-    // Update Item
     editForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = document.getElementById('edit-id').value;
         const updatedItem = {
             name: document.getElementById('edit-name').value,
             type: document.getElementById('edit-type').value,
-            dangerLevel: document.getElementById('edit-dangerLevel').value,
+            danger_level: document.getElementById('edit-dangerLevel').value,
             description: document.getElementById('edit-description').value
         };
 
@@ -192,7 +185,11 @@ function attachEventListeners() {
 async function loadItems() {
     try {
         const res = await fetch(API_URL);
-        const items = await res.json();
+        const rawItems = await res.json();
+        const items = rawItems.map(item => ({
+            ...item,
+            danger_level: item.danger_level
+        }));
         renderItems(items);
     } catch (error) {
         console.error('Error loading items:', error);
@@ -217,7 +214,7 @@ function renderItems(items) {
         const dangerP = createElement('p');
         const dangerStrong = createElement('strong', '', 'DANGER LEVEL: ');
         dangerP.appendChild(dangerStrong);
-        dangerP.appendChild(document.createTextNode(item.dangerLevel));
+        dangerP.appendChild(document.createTextNode(item.danger_level));
         card.appendChild(dangerP);
         
         const descP = createElement('p');
@@ -241,7 +238,6 @@ function renderItems(items) {
     });
 }
 
-// Global functions for inline onclick handlers
 window.deleteItem = async (id) => {
     try {
         await fetch(`${API_URL}/${id}`, {
@@ -257,7 +253,11 @@ window.openEditModal = async (id) => {
     const editModal = document.getElementById('edit-modal');
     try {
         const res = await fetch(`${API_URL}/${id}`);
-        const item = await res.json();
+        const rawItem = await res.json();
+        const item = {
+            ...rawItem,
+            dangerLevel: rawItem.danger_level || rawItem.dangerLevel
+        };
         
         document.getElementById('edit-id').value = item.id;
         document.getElementById('edit-name').value = item.name;
