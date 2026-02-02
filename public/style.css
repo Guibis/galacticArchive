@@ -20,17 +20,15 @@ body {
     padding: 0;
     text-transform: uppercase;
     overflow-x: hidden;
-    font-size: 12px; /* Base size for mobile readability with pixel font */
+    font-size: 12px;
 }
 
-/* Mobile First: Default Layout */
 .terminal-container {
     display: flex;
     flex-direction: column;
     padding: 10px;
 }
 
-/* Header */
 .lcars-header {
     display: flex;
     align-items: flex-end;
@@ -38,7 +36,7 @@ body {
 }
 
 .lcars-elbow {
-    width: 60px; /* Smaller elbow for mobile */
+    width: 60px;
     height: 20px;
     background-color: var(--lcars-purple);
     border-bottom-left-radius: 20px;
@@ -59,7 +57,10 @@ body {
     white-space: nowrap;
 }
 
-/* Main Layout: Column by default (Mobile) */
+.lcars-bar span {
+    flex-grow: 0;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -67,7 +68,6 @@ body {
     flex-grow: 1;
 }
 
-/* Archive Grid */
 .item-list-section {
     width: 100%;
     border: 2px solid var(--lcars-blue);
@@ -78,7 +78,7 @@ body {
 
 .archive-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
@@ -120,7 +120,6 @@ body {
     gap: 10px;
 }
 
-/* Control Panel */
 .control-panel {
     width: 100%;
     border: 2px solid var(--lcars-red);
@@ -128,11 +127,8 @@ body {
     border-radius: 10px;
     background-color: #050505;
     box-sizing: border-box;
-    /* Order: 2 puts it below content on mobile, 
-       but keeping typical flow (content first) is fine. */
 }
 
-/* Forms */
 .form-group {
     margin-bottom: 15px;
 }
@@ -152,7 +148,7 @@ input, select, textarea {
     color: var(--lcars-orange);
     font-family: var(--font-mono);
     box-sizing: border-box;
-    font-size: 1.1rem; /* Larger touch targets */
+    font-size: 1.1rem;
 }
 
 textarea {
@@ -165,12 +161,11 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--lcars-pale);
 }
 
-/* Buttons */
 .lcars-btn {
     background-color: var(--lcars-orange);
     color: black;
     border: none;
-    padding: 15px 20px; /* Larger touch target */
+    padding: 15px 20px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
@@ -178,7 +173,7 @@ input:focus, select:focus, textarea:focus {
     border-radius: 15px 0 0 15px;
     transition: background-color 0.3s;
     font-size: 0.8rem;
-    width: 100%; /* Full width buttons on mobile */
+    width: 100%;
     margin-top: 10px;
 }
 
@@ -209,7 +204,6 @@ input:focus, select:focus, textarea:focus {
     background-color: #910f0f;
 }
 
-/* Modal */
 .modal {
     position: fixed;
     top: 0;
@@ -255,10 +249,9 @@ input:focus, select:focus, textarea:focus {
     color: var(--lcars-red);
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 10px; /* Larger touch target */
+    padding: 10px;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
